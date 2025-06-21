@@ -17,6 +17,12 @@ export const completeOnboarding = async (userData) => {
 };
 
 
+export const login = async (loginData) => {
+  const response = await axiosInstance.post("/auth/login", loginData);
+  return response.data;
+};
+
+
 // When we need to read in server we use queryfn and get method but using mutation func means put,post,delete
 // query = read-only
 // mutation = write-only
