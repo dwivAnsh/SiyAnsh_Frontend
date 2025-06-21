@@ -7,8 +7,14 @@ export const signup = async (signupData) => {
 
 // Ye backend me ek protected route hai jo check karta hai ki token valid hai ya nahi
 export const getAuthUser = async () => {
-  const res = await axiosInstance.get("/auth/me");  // axiosInstance is from axios.js
-  return res.data;
+  // axiosInstance is from axios.js
+  try {
+    const res = await axiosInstance.get("/auth/me");
+    return res.data;
+  } catch (error) {
+    console.log("error in getAuthUser", error);
+    return null;
+  }
 }
 
 export const completeOnboarding = async (userData) => {
@@ -22,6 +28,10 @@ export const login = async (loginData) => {
   return response.data;
 };
 
+export const logout = async () => {
+  const response = await axiosInstance.post("/auth/logout");
+  return response.data;
+};
 
 // When we need to read in server we use queryfn and get method but using mutation func means put,post,delete
 // query = read-only
